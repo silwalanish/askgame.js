@@ -28,9 +28,9 @@ class GameObject{
 		this.game = game;
 		this.childrens = [];
 		this.components = [];
-		this.animations = [];
 		this.parent = null;
-		this.body = null;
+		this.collider = null;
+		this.tag = "";
 	}
 
 	draw(ctx){
@@ -41,27 +41,18 @@ class GameObject{
 		}
 	}
 
-	update(delta){
+	update(){
 		for (let child of this.childrens){
-			child.update(delta);
+			child.update();
 		}
 		for (let comp of this.components){
-			comp.update(delta);
-		}
-		for (var anim in this.animations){
-			this.animations[anim].update(delta);
+			comp.update();
 		}
 	}
 
 	AddChild(child){
 		child.Parent = this;
 		this.childrens.push(child);
-	}
-
-	AddAnimation(name, anim){
-		anim.Renderer = this.renderer;
-		anim.Parent = this;
-		this.animations[name] = anim;
 	}
 
 	AddComponent(child){
@@ -83,20 +74,29 @@ class GameObject{
 		}	
 	}
 
-	get Pos(){
-		return this.body.GetPosition();
-	}
-
-	get Dims(){
-		throw new Error("The object does not have dimensions");
-	}
-
 	set Parent(obj){
 		this.parent = obj;
 	}
 
 	get Parent(){
 		return this.parent;
+	}
+
+	set Collider(collider){
+		collider.parent = this;
+		this.collider = collider;
+	}
+
+	get Collider(){
+		return this.collider;
+	}
+
+	set Transform(transform){
+		this.transform = transform;
+	}
+
+	get Transform(){
+		return this.transform;
 	}
 
 	set Renderer(render){
@@ -106,5 +106,13 @@ class GameObject{
 
 	get Renderer(){
 		return this.renderer;
+	}
+
+	set Tag(tag){
+		this.tag = tag;
+	}
+
+	get Tag(){
+		return this.tag;
 	}
 }

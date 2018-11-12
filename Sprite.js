@@ -76,7 +76,7 @@ class Texture{
 		if (this.uv == null)
 			this.uv = new UV(0, 0, this.texture.width, this.texture.height);
 		ctx.save();
-		ctx.translate(transform.Pos.x, transform.Pos.y);
+		ctx.translate(transform.Pos.x, -transform.Pos.y);
 		ctx.rotate(angle);
 		ctx.drawImage(this.texture, 
 			this.uv.X * this.uv.U, this.uv.Y * this.uv.V, this.uv.U, this.uv.V,

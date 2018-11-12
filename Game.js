@@ -31,29 +31,28 @@ class Game{
 		this.canvas.width = width;
 		this.canvas.height = height;
 		this.context = this.canvas.getContext('2d');
+		this.root = new GameObject(this);
 		Timer.Then = Timer.Now;
-	}
-
-	CreateWorld(gravity){
-		this.world = new World(this, gravity);
 	}
 
 	start(){
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-		this.interval = setInterval(function(game) { game.update(); }, 33, this);
+		this.frameNo = 0;
+		this.interval = setInterval(() => {
+			this.update();
+		}, 33);
 	}
 
 	draw(){
 		this.clear();
-		this.world.draw(this.context);
+		this.context.save();
+		this.context.translate(this.width/2, this.height/2);
+		this.root.draw(this.context);
+		this.context.restore();
 	}
 
 	update(){
-		var now = Timer.Now;
-	    var dt = Timer.Delta / 1000;
-	    if(dt > 1/15) { dt = 1/15; }
-		this.world.update(dt);
-		Timer.Then = now;
+		this.root.update();
 		this.draw();
 	}
 
@@ -62,24 +61,13 @@ class Game{
 	}
 
 	AddToScene(obj){
-		this.world.AddChild(obj);
+		this.root.AddChild(obj);
 	}
 
 	clear(){
-		if(!this.background){
-			this.context.fillStyle = "#000";
-			this.context.fillRect(0, 0, this.width, this.height);
-		}else{
-			this.background.draw(this.context, this.world, 0);
-		}
+		this.context.fillStyle = "#000";
+		this.context.fillRect(0, 0, this.width, this.height);
 	}
-
-	set Background(texture){
-		this.background = texture;
-	}
-
-	get World(){
-		return this.world;
-	}
+	
 }
 

@@ -90,7 +90,7 @@ class Animation extends Component{
 
 	stop(){
 		this.playing = false;
-		this.currentPos = new b2Vec2(this.startX, this.startY);
+		this.currentPos = new Vector(this.startX, this.startY);
 		this.imgRenderer.Texture.UV = new UV(this.currentPos.x, this.currentPos.y, this.imgRenderer.Texture.UV.u, this.imgRenderer.Texture.UV.v);
 	}
 

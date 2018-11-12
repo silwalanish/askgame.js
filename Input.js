@@ -41,7 +41,6 @@ class Input{
 }
 
 window.addEventListener("keydown", function(e){
-	e.preventDefault();
 	Keys = Keys || [];
 	Input.KeyDown(e.keyCode);
 });
