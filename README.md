@@ -4,6 +4,9 @@ Simple 2D Canvas Game Engine for javascript
 askgame.js is a free open source 2d game engine created with javascript
 that uses canvas.
 
+# Demo
+https://silwalanish.github.io/askgame.js/index.html
+
 # How to use?
 1. Download the scripts files.
 2. Setup project
