@@ -17,21 +17,22 @@
 	<script type="text/javascript" src="Game.js"></script>
 	
 	<script type="text/javascript">
+		// Controller Class for Keyboard Controller
 		class Controller extends Component{
 
 			constructor(maxspeed, sensitivity, friction){
 				super();
-				this.maxspeed = maxspeed;
-				this.speed = Vector.ZERO();
-				this.friction = friction;
-				this.sensitivity = sensitivity;
+				this.maxspeed = maxspeed;	// Max Speed the player will move at
+				this.speed = Vector.ZERO();	// Player's current speed
+				this.friction = friction;	// Friction
+				this.sensitivity = sensitivity;	// Controller Sensitivity
 			}
 
 			update(){
-				if(Input.GetKey(37)) this.moveLeft();
-				else if(Input.GetKey(39)) this.moveRight();
-				else if(Input.GetKey(38)) this.moveUp();
-				else if(Input.GetKey(40)) this.moveDown();
+				if(Input.GetKey(37)) this.moveLeft();		// If Left Key is pressed move left
+				else if(Input.GetKey(39)) this.moveRight();	// If Left Key is pressed move left
+				else if(Input.GetKey(38)) this.moveUp();	// If Left Key is pressed move left
+				else if(Input.GetKey(40)) this.moveDown();	// If Left Key is pressed move left
 				else this.speed.mul(this.friction);
 
 				this.parent.Transform.Pos.X += this.speed.X;
